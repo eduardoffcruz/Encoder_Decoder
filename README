@@ -1,0 +1,76 @@
+===================================-INSTRUÇÕES__COMPRESSOR=================================================================================
+
+Para comprimir as imagens localizadas em '..data/original/' :
+=======	1º- Começar por abrir o PowerShell [Windows] ou Terminal [Linux ou MacOS]
+	\_Caso não tenha o módulo 'bitarray' instalado será necessário instalá-lo (para executar o LZ77) através do comando: > pip install bitarray
+
+=======	2º- Através da linha de comandos navegue para a pasta 'code': 
+		> cd {Path}/code
+-em que {Path} deve ser substituído pelo path absoluto da pasta, em que se encontram as pastas: 'code','data','histograms' & 'papers'
+-e.g. > cd Desktop/TP2/code
+
+=======	3º 
+	\_Para obter informação (Size, Entropy, Histogram..) sobre TODAS as imagens:
+		> python encoder.py
+
+	\_Para escolher os ficheiros que deseja analisar ou comprimir:
+		> python encoder.py -f{num} filename0 filename1 ...
+-em que {num} deve ser substituído pelo número de ficheiros que deseja analisar ou codificar (se omitido, {num}==1)
+-e.g.:
+> python encoder.py -f3 egg.bmp pattern.bmp zebra.bmp
+ou
+>python encoder.py -f egg.bmp
+
+	\_Para obter informação (Size, Entropy, Histogram..) sobre UMA OU MAIS imagens utilize a flag '-info':
+		> python encoder.py -f{num} filename0 filename1 ... -info 
+		ou
+		> python encoder.py -info 
+
+	\_Para Transformar e Codificar as imagens pode utilizar as seguintes flags:
+		|	-sub	 => Sub Filter (preditor linear do CODEC PNG)	
+		|	-up      => Up Filter (preditor linear do CODEC PNG)	
+		|	-rle	 => Run-Length Encoding				
+		|	-mtf	 => Move-to-Front				
+		|	-group	 => Agrupamento de Símbolos			
+		|	-huff	 => Codificação de Huffman			
+		|	-lz77	 => LZ77 (Dicionário Adaptativo)		
+		|	-lz78	 => LZ78 (Dicionário Adaptativo)		
+		|	-lzw	 => LZW (variante do LZ78)			
+		|	-lzma	 => LZMA (variante do LZ77) 			
+		|	-gzip	 => gzip 					
+		|	-bzip2	 => bzip2 					
+
+	NOTA:
+	As operações serão aplicadas pela ordem das respetivas flags! 
+	e.g.: > python encoder.py -f1 egg.bmp -up -rle -huff 
+	        |=> Ao ficheiro egg.bmp, em '..data/original/', 
+		|    será primeiro aplicado o Filter UP (do codec png),
+		|    seguido do Run-Length Encoding,
+		|    seguido da Codificação de Huffman. 
+		|O ficheiro resultante da aplicação destas operações será armazenado 
+  	      	|na pasta '..data/compressed/' com o nome 'egg.up.rle.huff'! 
+		|Ficheiros intermédios como 'egg.up.rle' serão também armazenados nessa pasta. 
+ 	
+ -TODOS OS FICHEIROS RESULTANTES DAS TRANSFORMAÇÕES E CODIFICAÇÕES APLICADAS SERÃO ARMAZENADOS NA PASTA '..data/compressed/'
+ -TODOS OS HISTOGRAMAS OBTIDOS SERÃO GUARDADOS NA PASTA '../histograms/'
+ -----A ORGANIZAÇÃO DAS PASTAS É EXTREMAMENTE IMPORTANTE PARA O BOM FUNCIONAMENTO DO PROGRAMA-----
+ ===================================-INSTRUÇÕES__DESCOMPRESSOR=================================================================================
+
+Desenvolvemos também um simples descompressor que permite efetuar a descompressão de alguns
+dos ficheiros comprimidos através de encoder.py (armazenados na pasta 'compressed').
+Todos os ficheiros descomprimidos são armazenados na pasta 'decompressed'.
+
+--Para executar o descompressor deve seguir os seguintes passos:
+		\__à semelhança do encoder.py, utilize o Terminal ou a PowerShell do seu OS
+		   
+		O comando:
+		   > python decoder.py
+				\__Permite descomprimir todos os ficheiros compatíveis com este descodificador (ler NOTA) armazenados 
+					na diretoria 'compressed'.
+
+		O comando:
+			> python decoder.py -f2 egg.up.lzma landscape.sub 
+				\__Permite, neste exemplo, descomprimir os 2 ficheiros egg.up.lzma e landscape.sub 
+			
+*NOTA: Este descodificador apenas permite descodificar ficheiros que tenham sido codificados com os algoritmos SUB, UP, RLE, MTF, BWT, LZW, ZMA, bzip2, gzip 
+============================================EOF=================================================================================================
