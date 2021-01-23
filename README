@@ -1,4 +1,4 @@
-===================================-INSTRUÇÕES__COMPRESSOR=================================================================================
+===================================-INSTRUÇÕES__COMPRESSOR=============================================
 
 Para comprimir as imagens localizadas em '..data/original/' :
 =======	1º- Começar por abrir o PowerShell [Windows] ou Terminal [Linux ou MacOS]
@@ -54,9 +54,9 @@ ou
  -TODOS OS FICHEIROS RESULTANTES DAS TRANSFORMAÇÕES E CODIFICAÇÕES APLICADAS SERÃO ARMAZENADOS NA PASTA '..data/compressed/'
  -TODOS OS HISTOGRAMAS OBTIDOS SERÃO GUARDADOS NA PASTA '../histograms/'
  -----A ORGANIZAÇÃO DAS PASTAS É EXTREMAMENTE IMPORTANTE PARA O BOM FUNCIONAMENTO DO PROGRAMA-----
- ===================================-INSTRUÇÕES__DESCOMPRESSOR=================================================================================
+ ===================================-INSTRUÇÕES__DESCOMPRESSOR===============================================
 
-Desenvolvemos também um simples descompressor que permite efetuar a descompressão de alguns
+Desenvolvi também um simples descompressor que permite efetuar a descompressão de alguns
 dos ficheiros comprimidos através de encoder.py (armazenados na pasta 'compressed').
 Todos os ficheiros descomprimidos são armazenados na pasta 'decompressed'.
 
@@ -73,4 +73,4 @@ Todos os ficheiros descomprimidos são armazenados na pasta 'decompressed'.
 				\__Permite, neste exemplo, descomprimir os 2 ficheiros egg.up.lzma e landscape.sub 
 			
 *NOTA: Este descodificador apenas permite descodificar ficheiros que tenham sido codificados com os algoritmos SUB, UP, RLE, MTF, BWT, LZW, ZMA, bzip2, gzip 
-============================================EOF=================================================================================================
+============================================EOF==================================================
